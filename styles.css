@@ -1,9 +1,13 @@
 /* General styling */
 body {
-    font-family: Allura, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    background-image: url('images/quill.png'); /* URL of your quill image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: bottom right; /* Places the image in the bottom right corner */
+    background-size: 400px; /* Optional: Adjust the size of the quill */
 }
 
 /* Header */
@@ -36,7 +40,7 @@ h1 {
     border: 1px solid #EC368D;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Sidebar buttons */
