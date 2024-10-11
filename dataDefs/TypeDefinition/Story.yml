@@ -1,0 +1,39 @@
+attributes:
+  - itemInfo:
+      type: ID
+    name: id
+    nameInfo:
+      displayName: Story ID
+  - itemInfo:
+      associatedEntity: Genre.yml
+      type: ID
+    name: genre
+    nameInfo:
+      displayName: Genre.yml
+  - itemInfo:
+      type: STRING
+    name: title
+    nameInfo:
+      displayName: Story Title
+  - itemInfo:
+      type: DATE
+    name: createdAt
+    nameInfo:
+      displayName: Created At
+  - itemInfo:
+      associatedEntity: SubGenre.yml
+      type: ID
+    name: subGenre
+    nameInfo:
+      displayName: Sub Genre.yml
+  - itemInfo:
+      collectionType: ARRAY
+      type: ID
+    name: contributor
+    nameInfo:
+      displayName: Contributor(s)
+  - itemInfo:
+      type: DATE
+      name: lastUpdate
+      nameInfo:
+        displayName: Last Update
