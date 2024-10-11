@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    background-image: url('images/quill.png'); /* URL of your quill image */
+    background-image: url('images/quilltransparent.png'); /* URL of your quill image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-position: bottom right; /* Places the image in the bottom right corner */
     background-size: 400px; /* Optional: Adjust the size of the quill */
@@ -12,8 +12,9 @@ body {
 
 /* Header */
 header {
-    background-color: #3815fc;
-    color: white;
+    background-color: #E99BD6;
+    color: black;
+    font-family: Dancing, cursive;
     padding: 20px;
     text-align: center;
 }
