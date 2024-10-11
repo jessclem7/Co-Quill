@@ -47,6 +47,7 @@ h1 {
 /* Sidebar buttons */
 .sidebar {
     position: fixed;
+    background-color: #541388;
     right: 20px;
     top: 100px;
     display: flex;
