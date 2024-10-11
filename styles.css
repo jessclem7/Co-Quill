@@ -12,8 +12,9 @@ body {
 
 /* Header */
 header {
-    background-color: #3815fc;
-    color: white;
+    background-color: #E99BD6;
+    color: black;
+    font-family: Dancing Script;
     padding: 20px;
     text-align: center;
 }
