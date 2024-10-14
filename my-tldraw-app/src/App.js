@@ -4,7 +4,7 @@ import './App.css';
 import { Tldraw } from 'tldraw'
 import 'tldraw/tldraw.css'
 
-function App() {
+export default function App() {
 	return (
 		<div style={{ position: 'fixed', inset: 0 }}>
 			<Tldraw />
