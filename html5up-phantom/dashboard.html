@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Co-Quill Dashboard</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			.dashboard-grid {
+				display: flex;
+				justify-content: space-around;
+				margin: 20px;
+			}
+			.dashboard-item {
+				border: 1px solid #541388;
+				border-radius: 8px;
+				padding: 20px;
+				width: 30%;
+				text-align: center;
+			}
+			.sidebar {
+				margin: 20px;
+			}
+			.sidebar button {
+				background-color: #541388;
+				color: white;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			.genres {
+				text-align: center; /* Center the genres */
+			}
+			.genre-item {
+				cursor: pointer;
+				margin: 10px 0;
+				position: relative;
+				padding: 10px;
+			}
+			.genre-item:hover {
+				background-color: rgba(84, 19, 136, 0.1);
+				border-radius: 5px;
+			}
+			.subgenres {
+				display: none;
+				overflow: hidden;
+				transition: height 0.3s ease;
+				height: 0;
+				padding-left: 0; /* Remove left padding */
+			}
+			.subgenres.show {
+				display: block;
+				height: auto;
+			}
+			.subgenre-item {
+				cursor: pointer;
+				margin: 5px 0;
+				display: inline-block; /* Align items horizontally */
+				padding: 5px; /* Add padding for hover effect */
+			}
+			.subgenre-item:hover {
+				background-color: rgba(84, 19, 136, 0.2); /* Hover effect */
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+							<!-- Logo -->
+							<a href="index.html" class="logo">
+								<span class="icon">
+									<img src="images/Co-Quill Logo.png" alt="" style="width: 200px; height: auto;" />
+								</span>
+							</a>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="dashboard.html">Dashboard</a></li>
+							<li><a href="pad.html">Text Editor</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Co-Quill Dashboard Header -->
+							<header>
+								<h1 style="text-align: center;">Dashboard</h1>
+							</header>
+
+							<!-- Main Dashboard Section -->
+							<main>
+								<!-- Three Dashboard Items -->
+								<section class="dashboard-grid">
+									<div class="dashboard-item">
+										<h2>Genres</h2>
+										<p>Let's start writing! Pick a Genre.</p>
+										<div class="genres">
+											<div class="genre-item" onclick="toggleSubgenres(event, 'horrorSubgenres')">
+												<strong>Horror</strong>
+												<div id="horrorSubgenres" class="subgenres">
+													<div class="subgenre-item" onclick="goToPad('Gothic')">Gothic</div>
+													<div class="subgenre-item" onclick="goToPad('Psychological')">Psychological</div>
+													<div class="subgenre-item" onclick="goToPad('Paranormal')">Paranormal</div>
+												</div>
+											</div>
+
+											<div class="genre-item" onclick="toggleSubgenres(event, 'mysterySubgenres')">
+												<strong>Mystery</strong>
+												<div id="mysterySubgenres" class="subgenres">
+													<div class="subgenre-item" onclick="goToPad('Crime')">Crime</div>
+													<div class="subgenre-item" onclick="goToPad('Noir')">Noir</div>
+													<div class="subgenre-item" onclick="goToPad('Historical')">Historical</div>
+												</div>
+											</div>
+
+											<div class="genre-item" onclick="toggleSubgenres(event, 'romanceSubgenres')">
+												<strong>Romance</strong>
+												<div id="romanceSubgenres" class="subgenres">
+													<div class="subgenre-item" onclick="goToPad('Contemporary')">Contemporary</div>
+													<div class="subgenre-item" onclick="goToPad('LGBTQ+')">LGBTQ+</div>
+													<div class="subgenre-item" onclick="goToPad('Comedy')">Comedy</div>
+													<div class="subgenre-item" onclick="goToPad('Paranormal')">Paranormal</div>
+													<div class="subgenre-item" onclick="goToPad('Historical')">Historical</div>
+													<div class="subgenre-item" onclick="goToPad('Fantasy')">Fantasy</div>
+												</div>
+											</div>
+
+											<div class="genre-item" onclick="toggleSubgenres(event, 'sciFiSubgenres')">
+												<strong>Science Fiction</strong>
+												<div id="sciFiSubgenres" class="subgenres">
+													<div class="subgenre-item" onclick="goToPad('Steampunk')">Steampunk</div>
+													<div class="subgenre-item" onclick="goToPad('Cyberpunk')">Cyberpunk</div>
+													<div class="subgenre-item" onclick="goToPad('Dystopian')">Dystopian</div>
+													<div class="subgenre-item" onclick="goToPad('Post-apocalypse')">Post-apocalypse</div>
+												</div>
+											</div>
+
+											<div class="genre-item" onclick="toggleSubgenres(event, 'thrillerSubgenres')">
+												<strong>Thriller</strong>
+												<div id="thrillerSubgenres" class="subgenres">
+													<div class="subgenre-item" onclick="goToPad('Psychological')">Psychological</div>
+													<div class="subgenre-item" onclick="goToPad('Crime')">Crime</div>
+													<div class="subgenre-item" onclick="goToPad('Action')">Action</div>
+													<div class="subgenre-item" onclick="goToPad('Spy')">Spy</div>
+													<div class="subgenre-item" onclick="goToPad('Political')">Political</div>
+													<div class="subgenre-item" onclick="goToPad('Historical')">Historical</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="dashboard-item">
+										<h2>Contributions</h2>
+										<p>See past contributions.</p>
+										<!-- Add dynamic content for suggestions -->
+									</div>
+
+									<div class="dashboard-item">
+										<h2>Previously Viewed</h2>
+										<p>Search your previously viewed stories.</p>
+										<!-- Add dynamic content for mood boards -->
+									</div>
+								</section>
+
+								<!-- Sidebar Buttons on Right Side -->
+								<aside class="sidebar">
+									<button onclick="createStory()">Settings</button>
+								</aside>
+							</main>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Get in touch</h2>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<input type="text" name="name" id="name" placeholder="Name" />
+										</div>
+										<div class="field half">
+											<input type="email" name="email" id="email" placeholder="Email" />
+										</div>
+										<div class="field">
+											<textarea name="message" id="message" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send" class="primary" /></li>
+									</ul>
+								</form>
+							</section>
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				function createStory() {
+					alert('Settings clicked!');
+				}
+
+				function goToPad(subgenre) {
+					window.location.href = `pad.html?subgenre=${encodeURIComponent(subgenre)}`;
+				}
+
+				function toggleSubgenres(event, subgenreId) {
+					const subgenres = document.getElementById(subgenreId);
+					const isVisible = subgenres.style.display === "block";
+
+					// Hide all subgenres
+					const allSubgenres = document.querySelectorAll('.subgenres');
+					allSubgenres.forEach(sub => sub.style.display = "none");
+
+					// Show the selected subgenres if they were not already visible
+					if (!isVisible) {
+						subgenres.style.display = "block";
+					}
+				}
+				function toggleSubgenres(event, subgenreId) {
+    const subgenres = document.getElementById(subgenreId);
+    const isVisible = subgenres.classList.contains('show');
+
+    // Hide all subgenres
+    const allSubgenres = document.querySelectorAll('.subgenres');
+    allSubgenres.forEach(sub => {
+        sub.classList.remove('show');
+        sub.style.height = '0'; // Reset height
+    });
+
+    // Show the selected subgenres if they were not already visible
+    if (!isVisible) {
+        subgenres.classList.add('show');
+        subgenres.style.height = `${subgenres.scrollHeight}px`; // Set to the natural height
+    }
+}
+
+			</script>
+	</body>
+</html>

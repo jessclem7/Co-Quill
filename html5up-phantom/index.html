@@ -135,10 +135,8 @@
 						<h2>Menu</h2>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li><a href="generic.html">Ipsum veroeros</a></li>
-							<li><a href="generic.html">Tempus etiam</a></li>
-							<li><a href="generic.html">Consequat dolor</a></li>
-							<li><a href="elements.html">Elements</a></li>
+							<li><a href="dashboard.html">Dashboard</a></li>
+							<li><a href="pad.html">Text Editor</a></li>
 						</ul>
 					</nav>
 
@@ -174,7 +172,7 @@
 									<h2 id="formTitle">Log in/Sign up</h2>
 									
 									<!-- Form 1 -->
-									<form id="loginform" class="hidden">
+									<form id="loginform" class="hidden" onsubmit="window.location.href='dashboard.html'; return false;">
 										<label for="name1">Name:</label>
 										<input type="text" id="name1" name="name1" required>
 										<label for="email1">Email:</label>
@@ -184,7 +182,7 @@
 									</form>
 									
 									<!-- Form 2 -->
-									<form id="signupform" class="hidden">
+									<form id="signupform" class="hidden" onsubmit="window.location.href='dashboard.html'; return false;"
 										<label for="name2">Name:</label>
 										<input type="text" id="name2" name="name2" required>
 										<label for="email2">Email:</label>
@@ -297,6 +295,10 @@
 					form.classList.remove("show");
 					form.classList.add("hidden");
 				});
+			}
+
+			function toDash(event) {
+				window.location.href = "dashboard.html"
 			}
 
 			</script>
