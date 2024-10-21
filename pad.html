@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Editing Page</title>
 
-    <!-- Include Quill styles -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
     <style>
         /* General page layout */
         body {
@@ -33,9 +30,9 @@
         }
 
         /* Toolbar styling */
-        #toolbar {
+        /*toolbar {
             margin-left: 20px;
-        }
+        }*/
 
         h1 {
             margin-left: 20px;
@@ -58,49 +55,15 @@
 <div class="main-content">
     <h1>Co-Quill Text Editor</h1>
 
-    <!-- Toolbar for formatting options -->
-    <div id="toolbar">
-        <button class="ql-bold"></button>
-        <button class="ql-italic"></button>
-        <button class="ql-underline"></button>
-        <button class="ql-strike"></button>
-        <button class="ql-highlight"></button>
-        <select class="ql-color"></select>
-        <select class="ql-background"></select>
-        <button class="ql-clean"></button> <!-- Clear formatting -->
-    </div>
-
-    <!-- Editor container -->
+    <!-- Embed Etherpad using an iframe -->
     <div id="editor-container">
-        <!-- This is where the text content will appear -->
+        <iframe src="http://localhost:9001/p/yourpadname?showControls=true&showChat=false&showLineNumbers=true&useMonospaceFont=false"
+                width="100%"
+                height="500px"
+                style="border:none;">
+        </iframe>
     </div>
 </div>
 
-<!-- Include Quill.js -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-<script>
-    // Initialize the Quill editor
-    var quill = new Quill('#editor-container', {
-        theme: 'snow', // 'snow' is a clean, modern theme
-        modules: {
-            toolbar: '#toolbar'
-        }
-    });
-
-    // Add highlight format support
-    var toolbar = quill.getModule('toolbar');
-    toolbar.addHandler('highlight', function() {
-        var range = quill.getSelection();
-        if (range) {
-            quill.formatText(range.index, range.length, { background: '#FFFF00' });
-        }
-    });
-
-    // Example function for the sidebar button
-    function createStory() {
-        alert('Create a new story!');
-    }
-</script>
 </body>
 </html>
