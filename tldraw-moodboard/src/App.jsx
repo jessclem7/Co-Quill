@@ -4,7 +4,7 @@ import 'tldraw/tldraw.css'
 export default function App() {
 	return (
 		<div style={{ position: 'fixed', inset: 0 }}>
-			<Tldraw />
+			<Tldraw persistenceKey="moodboard-local-persistence" />
 		</div>
 	)
 }
