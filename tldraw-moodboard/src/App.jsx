@@ -1,6 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
-
 import { Tldraw } from 'tldraw'
 import 'tldraw/tldraw.css'
 
@@ -11,5 +8,3 @@ export default function App() {
 		</div>
 	)
 }
-
-export default App;
