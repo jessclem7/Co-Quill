@@ -14,16 +14,45 @@ body {
 header {
     background-color: #E99BD6;
     color: black;
-    font-family: Dancing, cursive;
-    padding: 20px;
+    font-family: 'Dancing Script', cursive;
     text-align: center;
+    padding: 0px;
 }
 
 h1 {
     margin: 0;
-    font-family: 'Dancing Script', cursive; /* Set the cursive font */
-    font-size: 76px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px; /* Smaller font size for the header */
 }
+
+#header .inner {
+    display: flex;
+    align-items: center; /* Vertically centers the logo and navigation */
+    justify-content: space-between; /* Distributes space between logo and menu */
+}
+
+#header .logo {
+    margin: 0; /* Remove default margin from the logo */
+}
+
+#header nav ul {
+    display: flex;
+    gap: 15px; /* Adds spacing between the menu items */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#header nav ul li {
+    display: inline-block;
+}
+
+#header nav ul li a {
+    text-decoration: none;
+    color: #333; /* Ensure the links are visible */
+    font-size: 16px; /* Adjust text size for navigation items */
+}
+
 
 /* Dashboard grid */
 .dashboard-grid {
@@ -68,3 +97,30 @@ button {
 button:hover {
     background-color: #555;
 }
+
+#menu {
+    display: none; /* Start with menu hidden */
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    width: 250px;
+    height: 100vh;
+    z-index: 999;
+}
+/* Modify the popup container if necessary */
+#quill-popup {
+    display: none; /* Start hidden */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 60vw; /* Adjust width as needed */
+    height: 70vh; /* Adjust height as needed */
+    overflow: hidden;
+}
+
+
