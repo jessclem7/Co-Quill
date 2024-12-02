@@ -26,12 +26,14 @@
             border-right: 1px solid #ddd;
             height: 200px;
             overflow-y: auto;
+            align-content: center;
+            height: 100px;
         }
 
         #editor-container {
-            height: 500px;
-            width: 950px;
-            margin: 20px;
+            height: 700px;
+            width: 1fr;
+            margin-top: 5px;
             border: 1px solid #ddd;
         }
 
@@ -67,6 +69,10 @@
             width: 100%;
             background: #fff;
             position: relative;
+        }
+
+        #header {
+            padding: 50px;
         }
 
         .popup-header {
@@ -127,7 +133,7 @@
                         <button class="close-btn" onclick="toggleMoodBoard()">X</button>
                         <span>Mood Board</span>
                     </div>
-                    <iframe id="tldraw-iframe" src="http://localhost:5173"></iframe>
+                    <iframe id="tldraw-iframe" src="http://localhost:3000"></iframe>
                 </div>
             </div>
 
@@ -145,7 +151,7 @@
             <!-- Editor container -->
             <div id="editor-container">
                 <!-- Embed Etherpad using an iframe -->
-                <iframe src="http://localhost:9001/p/yourpadname?showControls=true&showChat=false&showLineNumbers=true&useMonospaceFont=false"
+                <iframe src="http://localhost:9001/p/CoQuill?showControls=true&showChat=false&showLineNumbers=true&useMonospaceFont=false"
                         width="100%"
                         height="500px"
                         style="border:none;">
@@ -181,13 +187,20 @@
 </div>
 
 <!-- Scripts -->
+<!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
 <script>
+    // Replace these with your actual API keys
+    const etherpadApiKey = '9c0b5c2d1234567890abcdef12345678';  // Etherpad API key
+    const openaiApiKey = 'your-openai-api-key';  // OpenAI API key
+
+    // Toggle Mood Board visibility
     function toggleMoodBoard() {
         const moodBoardPopup = document.getElementById('tldraw-popup');
         moodBoardPopup.style.display = moodBoardPopup.style.display === 'flex' ? 'none' : 'flex';
     }
 
+    // Toggle Outline visibility and initialize Quill editor if not initialized
     function toggleOutline() {
         const outlinePopup = document.getElementById('outline-popup');
         outlinePopup.style.display = outlinePopup.style.display === 'flex' ? 'none' : 'flex';
@@ -199,17 +212,97 @@
         }
     }
 
-    function openSettings() {
-        alert('Open Settings!');
-    }
-
+    // Function to trigger AI helper based on the Etherpad iframe's padID
     function aiHelper() {
-        alert('AI Helper!');
+        const padID = getPadIDFromIframe();
+        if (padID) {
+            fetchPadText(padID); // Fetch the text, process it, and append AI suggestions
+        }
     }
 
-    function contributions() {
-        alert('View Contributions!');
+    // Function to get the Pad ID from the Etherpad iframe
+    function getPadIDFromIframe() {
+        const iframe = document.querySelector('iframe');
+        if (iframe) {
+            const src = iframe.src; // Get the iframe's source URL
+            const padID = src.split('/p/')[1].split('?')[0]; // Extract Pad ID
+            console.log('Pad ID:', padID);
+            return padID;
+        } else {
+            console.error('Etherpad iframe not found');
+            return null;
+        }
+    }
+
+    // Fetch text from Etherpad using the Etherpad API
+    function fetchPadText(padID) {
+        const apiURL = `http://localhost:9001/api/1.2.1/getText?apikey=${etherpadApiKey}&padID=${padID}`;
+
+        fetch(apiURL)
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === 0) {
+                    console.log('Pad Text:', data.data.text);
+                    handleAICompletion(data.data.text); // Pass text to AI for suggestions
+                } else {
+                    console.error('Error fetching pad text:', data.message);
+                }
+            })
+            .catch(error => console.error('Fetch error:', error));
+    }
+
+    // Handle AI completion using OpenAI API
+    function handleAICompletion(text) {
+        const apiEndpoint = 'https://api.openai.com/v1/completions';
+
+        fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${openaiApiKey}`
+            },
+            body: JSON.stringify({
+                model: "text-davinci-003", // Replace with the model you want to use
+                prompt: `${text}\n\nContinue the story:`, // Continue based on the pad text
+                max_tokens: 150
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.choices && data.choices[0].text) {
+                    console.log('AI Suggestion:', data.choices[0].text.trim());
+                    insertSuggestion(data.choices[0].text.trim());
+                } else {
+                    console.error('No suggestions returned from AI');
+                }
+            })
+            .catch(error => console.error('Error with AI API:', error));
+    }
+
+    // Insert the AI suggestion into Etherpad
+    function insertSuggestion(suggestionText) {
+        const padID = getPadIDFromIframe();
+        if (!padID) {
+            console.error('Cannot insert suggestion: Pad ID is missing');
+            return;
+        }
+
+        const apiURL = `http://localhost:9001/api/1.2.1/setText?apikey=${etherpadApiKey}&padID=${padID}&text=${encodeURIComponent(suggestionText)}`;
+
+        fetch(apiURL, {
+            method: 'POST',
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === 0) {
+                    console.log('Successfully inserted AI suggestion');
+                } else {
+                    console.error('Error inserting suggestion:', data.message);
+                }
+            })
+            .catch(error => console.error('Error with inserting suggestion:', error));
     }
 </script>
+
 </body>
 </html>
